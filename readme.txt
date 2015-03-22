@@ -7,7 +7,7 @@ Stable tag: 0.1
 
 == Description ==
 
-When a comment contains any of specified words in its content it will be sent to administrator with highlighted keywords, in despite of disabled global option about comments notifications.
+When a comment contains any of specified words in its content it will be sent to administrator with highlighted keywords.
 Keywords can be noted in the administrative panel
 
 
