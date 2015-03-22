@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Comment Keywords
-Description: When a comment contains any of specified words in its content it will be sent to administrator with highlighted keywords, in despite of disabled global option about comments notifications.
+Description: When a comment contains any of specified words in its content it will be sent to administrator with highlighted keywords.
 Version: 0.1
 Author: Limeira Studio
 Author URI: http://www.limeirastudio.com/
