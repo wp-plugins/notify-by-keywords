@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Comment Keywords
-Description: When a comment contains any of specified words in its content it will be sent to administrator with highlighted keywords.
+Plugin Name: Notify by Keywords
+Description: When a comment contains any of specified words in its content it will be sent to administrator with highlighted keywords, in despite of disabled global option about comments notifications.
 Version: 0.1
 Author: Limeira Studio
 Author URI: http://www.limeirastudio.com/
@@ -18,9 +18,9 @@ class Comment_Keywords	{
 	
 	public function __construct()	{
 			
-		$this->plugname = 'Comment Keywords';
+		$this->plugname = 'Notify by Keywords';
 		$this->version = '0.1';
-		$this->text_domain = 'ck';
+		$this->text_domain = 'nbk';
 		$this->defaults = array('state'=>'on','keywords'=>array('excellent article', 'you need a job', 'Lorem ipsum dolor sit amet'));
 		
 		add_action('wp_insert_comment', array(&$this,'comment_inserted'));
@@ -56,12 +56,12 @@ class Comment_Keywords	{
 		}
 	}
 	
-	public function ck_options_page()	{
+	public function nbk_options_page()	{
 		
-		if(isset($_POST['cmd']) && $_POST['cmd'] == 'ck_save_opt')	{
+		if(isset($_POST['cmd']) && $_POST['cmd'] == 'nbk_save_opt')	{
 			$keywords = explode("\n", trim($_POST['keywords']));
 			$options = array('state'=>$_POST['state'],'keywords'=>array_map(function($e){if($e)return trim($e);}, $keywords));
-	    	update_option('ck_options', $options);
+	    	update_option('nbk_options', $options);
 	    	?>
 		<div class="updated"><p><strong><?php echo __('Settings saved',$this->text_domain); ?></strong></p></div>
 		<?php } 
@@ -94,7 +94,7 @@ class Comment_Keywords	{
 		</tr>
 		</tbody>
 		</table>
-		<input type="hidden" name="cmd" value="ck_save_opt">
+		<input type="hidden" name="cmd" value="nbk_save_opt">
 		<?php @submit_button(); ?>
 		</form>
 		</div>
@@ -102,18 +102,18 @@ class Comment_Keywords	{
 	}
 
 	private function get_options()	{
-		return (!get_option('ck_options')) ? $this->defaults : get_option('ck_options');
+		return (!get_option('nbk_options')) ? $this->defaults : get_option('nbk_options');
 	}
 	
 	public function add_menu()	{
-		add_options_page($this->plugname, $this->plugname, 'manage_options', 'ck_options_page_unique', array(&$this,'ck_options_page'));
+		add_options_page($this->plugname, $this->plugname, 'manage_options', 'nbk_options_page_unique', array(&$this,'nbk_options_page'));
 	}
 	
 	public static function activate() {
 	}
 	
 	public static function deactivate()	{
-	    delete_option('ck_options');
+	    delete_option('nbk_options');
 	}
 			 
 }
